@@ -1,7 +1,7 @@
 import asyncio
 import boto3
 import random
-import time  # <--- NEW: We need this to track the 5-second window
+import time
 from fastapi import FastAPI, Depends, HTTPException, WebSocket
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine
@@ -72,7 +72,7 @@ async def register(user: UserCreate, db: Session = Depends(get_db)):  # <--- Cha
         db.commit()
         db.refresh(new_user)
 
-        # 👇 NEW: Blast the new registration to the SOC Dashboard!
+        # NEW: Blast the new registration to the SOC Dashboard!
         await manager.broadcast(f"🔵 INFO: New Security Clearance Granted - {user.email} Registered")
 
         return {"message": "User created securely in AWS Cognito!"}
@@ -152,7 +152,7 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
         return {"message": "AWS Login successful", "status": "online", "access_token": token}
 
     except cognito_client.exceptions.NotAuthorizedException:
-        # 👇 NEW: BRUTE FORCE ALGORITHM
+        # NEW: BRUTE FORCE ALGORITHM
         current_time = time.time()
 
         # Get past attempts for this email, but throw away ones older than 5 seconds
