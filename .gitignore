@@ -1,0 +1,14 @@
+# React
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+venv/
+*.pyc
+.pytest_cache/
+database.db
+
+# OS Files
+.DS_Store

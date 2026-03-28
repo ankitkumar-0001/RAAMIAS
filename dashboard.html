@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RAAMAS Live SOC</title>
+</head>
+
+<body style="background-color: #0d1117; color: #00ff00; font-family: monospace; padding: 40px;">
+    <h2>🛡️ RAAMAS Real-Time Security Logs</h2>
+    <hr style="border-color: #333;">
+    <ul id="logs" style="list-style-type: none; padding: 0; font-size: 18px;">
+        <li style="color: #888;">System initialized. Waiting for AWS events...</li>
+    </ul>
+
+    <script>
+        // Connect directly to your FastAPI WebSocket!
+        var ws = new WebSocket("ws://localhost:8000/ws");
+
+        ws.onmessage = function (event) {
+            var logs = document.getElementById('logs');
+            var newLog = document.createElement('li');
+
+            // Add a timestamp to the alert so it looks professional
+            newLog.textContent = "[" + new Date().toLocaleTimeString() + "] " + event.data;
+
+            // Add the newest alert to the top of the list
+            logs.insertBefore(newLog, logs.firstChild);
+        };
+    </script>
+</body>
+
+</html>
