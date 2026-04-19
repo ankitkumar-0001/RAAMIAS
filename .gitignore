@@ -1,14 +1,11 @@
-# React
-node_modules/
-dist/
-.env
-
-# Python
+# Python / FastAPI
 __pycache__/
 venv/
-*.pyc
-.pytest_cache/
-database.db
+env/
+.env
+test.db
 
-# OS Files
+# React / Frontend
+node_modules/
+dist/
 .DS_Store
